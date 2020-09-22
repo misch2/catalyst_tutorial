@@ -43,15 +43,6 @@ __PACKAGE__->config(
     enable_catalyst_header => 1, # Send X-Catalyst header
     encoding => 'UTF-8', # Setup request decoding and response encoding
 );
-__PACKAGE__->config(
-    # Configure the view
-    'View::HTML' => {
-        #Set the location for TT files
-        INCLUDE_PATH => [
-            __PACKAGE__->path_to( 'root', 'src' ),
-        ],
-    },
-);
 # Start the application
 __PACKAGE__->setup();
 

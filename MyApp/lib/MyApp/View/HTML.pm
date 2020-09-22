@@ -8,6 +8,11 @@ __PACKAGE__->config(
     TEMPLATE_EXTENSION => '.tt2',
     render_die => 1,
     ENCODING => 'utf-8',
+    #Set the location for TT files
+    INCLUDE_PATH => [
+        MyApp->path_to( 'root', 'src' ),
+    ],
+    WRAPPER => 'wrapper.tt2',
 );
 
 =head1 NAME
