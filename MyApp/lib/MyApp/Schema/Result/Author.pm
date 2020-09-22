@@ -106,8 +106,9 @@ Composing rels: L</book_authors> -> book
 
 __PACKAGE__->many_to_many("books", "book_authors", "book");
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2020-09-22 11:28:23
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:W3giM03sO6VSJUPDrGz/zw
+
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2020-09-22 12:55:31
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:c5+DNOlL5e46i4b0rmLXLQ
 
 #
 # Row-level helper methods

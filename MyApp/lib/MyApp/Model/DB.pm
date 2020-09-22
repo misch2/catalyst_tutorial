@@ -11,7 +11,7 @@ __PACKAGE__->config(
         user => '',
         password => '',
         on_connect_do => q{PRAGMA foreign_keys = ON},
-        sqlite_unicode => 1,
+        sqlite_unicode => q{1},
     }
 );
 
