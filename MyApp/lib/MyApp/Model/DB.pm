@@ -5,12 +5,13 @@ use base 'Catalyst::Model::DBIC::Schema';
 
 __PACKAGE__->config(
     schema_class => 'MyApp::Schema',
-    
+
     connect_info => {
         dsn => 'dbi:SQLite:myapp.db',
         user => '',
         password => '',
         on_connect_do => q{PRAGMA foreign_keys = ON},
+        sqlite_unicode => 1,
     }
 );
 
