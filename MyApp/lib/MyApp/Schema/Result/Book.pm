@@ -126,15 +126,6 @@ __PACKAGE__->many_to_many("authors", "book_authors", "author");
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
-
-# many_to_many():
-#   args:
-#     1) Name of relationship bridge, DBIC will create accessor with this name
-#     2) Name of has_many() relationship this many_to_many() is shortcut for
-#     3) Name of belongs_to() relationship in model class of has_many() above
-#   You must already have the has_many() defined to use a many_to_many().
-__PACKAGE__->many_to_many(authors => 'book_authors', 'author');
-
 #
 # Enable automatic date handling
 #
@@ -145,5 +136,39 @@ __PACKAGE__->add_columns(
     { data_type => 'timestamp', set_on_create => 1, set_on_update => 1 },
 );
 
+=head2 author_count
+ 
+Return the number of authors for the current book
+ 
+=cut
+ 
+sub author_count {
+    my ($self) = @_;
+ 
+    # Use the 'many_to_many' relationship to fetch all of the authors for the current
+    # and the 'count' method in DBIx::Class::ResultSet to get a SQL COUNT
+    return $self->authors->count;
+}
+
+=head2 author_list
+ 
+Return a comma-separated list of authors for the current book
+ 
+=cut
+ 
+sub author_list {
+    my ($self) = @_;
+ 
+    # Loop through all authors for the current book, calling all the 'full_name'
+    # Result Class method for each
+    my @names;
+    foreach my $author ($self->authors) {
+        push(@names, $author->full_name);
+    }
+ 
+    return join(', ', @names);
+}
+
 __PACKAGE__->meta->make_immutable;
+
 1;

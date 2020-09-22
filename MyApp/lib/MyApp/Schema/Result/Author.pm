@@ -106,20 +106,17 @@ Composing rels: L</book_authors> -> book
 
 __PACKAGE__->many_to_many("books", "book_authors", "book");
 
-
 # Created by DBIx::Class::Schema::Loader v0.07049 @ 2020-09-22 11:28:23
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:W3giM03sO6VSJUPDrGz/zw
 
+#
+# Row-level helper methods
+#
+sub full_name {
+    my ($self) = @_;
 
-# You can replace this text with custom code or comments, and it will be preserved on regeneration
-
-# many_to_many():
-#   args:
-#     1) Name of relationship bridge, DBIC will create accessor with this name
-#     2) Name of has_many() relationship this many_to_many() is shortcut for
-#     3) Name of belongs_to() relationship in model class of has_many() above
-#   You must already have the has_many() defined to use a many_to_many().
-__PACKAGE__->many_to_many(books => 'book_authors', 'book');
+    return $self->first_name . ' ' . $self->last_name;
+}
 
 __PACKAGE__->meta->make_immutable;
 1;
