@@ -1,0 +1,5 @@
+<p>
+    This is a TT view template, called '[% template.name %]'.
+    <br>
+    Test češtiny
+</p>
