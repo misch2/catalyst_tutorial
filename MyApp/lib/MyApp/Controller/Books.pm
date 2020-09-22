@@ -34,7 +34,7 @@ Fetch all book objects and pass to books/list.tt2 in stash to be displayed
 
 =cut
 
-sub list :Local {
+sub list :Chained('base') :PathPart('list') :Args(0) {
     # Retrieve the usual Perl OO '$self' for this object. $c is the Catalyst
     # 'Context' that's used to 'glue together' the various components
     # that make up the application
@@ -64,6 +64,9 @@ sub base :Chained('/') :PathPart('books') :CaptureArgs(0) {
 
     # Print a message to the debug log
     $c->log->debug('*** INSIDE BASE METHOD ***');
+
+    # Load status messages
+    $c->load_status_msgs;
 }
 
 =head2 object
@@ -221,13 +224,16 @@ Delete a book
 sub delete :Chained('object') :PathPart('delete') :Args(0) {
     my ($self, $c) = @_;
 
+    # Saved the PK id for status_msg below
+    my $id = $c->stash->{object}->id;
+
     # Use the book object saved by 'object' and delete it along
-    # with related 'book_author' entries
+    # with related 'book_authors' entries
     $c->stash->{object}->delete;
 
-    # Redirect the user back to the list page with status msg as an arg
+    # Redirect the user back to the list page
     $c->response->redirect($c->uri_for($self->action_for('list'),
-        {status_msg => "Book deleted."}));
+        {mid => $c->set_status_msg("Deleted book $id")}));
 }
 
 =encoding utf8
